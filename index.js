@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs'
+import graphqlUploadExpress from 'graphql-upload/graphqlUploadExpress.mjs';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
 
@@ -37,8 +37,7 @@ const startServer = async() => {
 
   app.use(graphqlUploadExpress());
 
-  console.log(DATABASE_NAME, DATABASE_URL)
-  databaseConnection(DATABASE_URL, DATABASE_NAME)
+  databaseConnection(DATABASE_URL, DATABASE_NAME);
 
   app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
