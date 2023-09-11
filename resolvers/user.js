@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { ObjectId } from 'mongodb';
 
 import sendEmail from '../config/emailSending.js';
+import resetPasswordEmailTemplate from '../htmlEmailTemplates/resetPasswordLink.js';
 import fileUpload from './../config/fileUpload.js';
 import authentication from '../middleware/authentication.js';
 import { getDatabase } from './../config/databaseConnection.js';
@@ -196,14 +197,14 @@ const userResolvers = {
             const supportedFormat = ['image/jpeg', 'image/png'];
             const uploadStatus = await fileUpload(fileInfo, fileMaxSize, fileName, filePath, supportedFormat);
 
-            if(uploadStatus.status){
+            if (uploadStatus.status) {
 
               const userCollection = (await getDatabase()).collection("users");
-              const updateStatus = await userCollection.updateOne({ _id: new ObjectId(args.userId) }, { $set: { profilePicture:  uploadStatus.fileName} })
-             
+              const updateStatus = await userCollection.updateOne({ _id: new ObjectId(args.userId) }, { $set: { profilePicture: uploadStatus.fileName } })
+
               return uploadStatus.status && updateStatus.acknowledged;
 
-            }else{
+            } else {
               throw new Error("Failed to Upload Profile Picture");
             }
 
@@ -213,6 +214,34 @@ const userResolvers = {
 
         } else {
           throw new Error("Authentication Failed");
+        }
+      } catch (error) {
+        throw error;
+      }
+    },
+    userResetPasswordSendEmail: async (_, args, context, info) => {
+      try {
+        const { email } = args;
+        if (email) {
+
+          const userCollection = (await getDatabase()).collection("users");
+
+          const registerUser = await userCollection.findOne({ email }, { projection: { _id: 1, password: 1 } });
+          if (registerUser) {
+
+            const jwt_secret_key = registerUser._id + process.env.JWT_SECRET_KEY;
+            const resetPasswordToken = Jwt.sign({ userId: registerUser._id }, jwt_secret_key, { expiresIn: process.env.TOKEN_EXPIRES });
+            const resetPasswordLink = `http://localhost:${process.env.PORT}/new-password/${registerUser._id}/${resetPasswordToken}`;
+            const emailTitle = "Reset Password";
+            const emailTemplate = resetPasswordEmailTemplate(emailTitle, resetPasswordLink);
+
+            return sendEmail(email, emailTitle, emailTemplate);
+
+          } else {
+            throw new Error("User is Not Register");
+          }
+        } else {
+          throw new Error("All Fields are Required");
         }
       } catch (error) {
         throw error;
