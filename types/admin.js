@@ -7,7 +7,6 @@ const adminTypeDefs = gql`
     _id: ID
     fullName: String!
     email: String!
-    password: String!
   }
 
   type Query{
