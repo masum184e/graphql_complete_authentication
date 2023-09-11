@@ -8,6 +8,7 @@ import fileUpload from './../config/fileUpload.js';
 import authentication from '../middleware/authentication.js';
 import { getDatabase } from './../config/databaseConnection.js';
 import { decrypt, encrypt } from '../config/encryptionDecryption.js';
+import { validateAlphabet, validateAlphabetWithOneSpace, validateEmail, validateNumber, validatePassword } from '../config/validation.js';
 
 const userResolvers = {
   Query: {
@@ -87,6 +88,12 @@ const userResolvers = {
         const { firstName, lastName, email, phoneNumber, password } = args;
         if (firstName && lastName && email && phoneNumber && password) {
 
+          validateAlphabetWithOneSpace(firstName);
+          validateAlphabet(lastName);
+          validateEmail(email);
+          validateNumber(phoneNumber, 11);
+          validatePassword(password);
+
           const userCollection = (await getDatabase()).collection("users");
 
           const duplicateUser = await userCollection.findOne({ $or: [{ email }, { phoneNumber }] });
@@ -124,12 +131,12 @@ const userResolvers = {
     },
     userLogin: async (_, args, context, info) => {
       try {
-        const { email, password } = args;
-        if (email && password) {
+        const { identifier, password } = args;
+        if (identifier && password) {
 
           const userCollection = (await getDatabase()).collection("users");
 
-          const registerUser = await userCollection.findOne({ email }, { projection: { _id: 1, password: 1 } });
+          const registerUser = await userCollection.findOne({ $or: [{ email: identifier }, { phoneNumber: identifier }] }, { projection: { _id: 1, password: 1 } });
           if (registerUser) {
 
             const isMatch = await bcrypt.compare(password, registerUser.password);
@@ -254,10 +261,12 @@ const userResolvers = {
         const { secretKey, token, password } = args;
         if (secretKey && token && password) {
 
+          validatePassword(password);
+
           try {
             const verifiedToken = Jwt.verify(token, process.env.JWT_SECRET_KEY);
             const userId = decrypt(verifiedToken.userId, Buffer.from(secretKey, 'hex'));
-            
+
             const bcryptSalt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_GEN_SALT_NUMBER));
             const hashPassword = await bcrypt.hash(password, bcryptSalt);
 
