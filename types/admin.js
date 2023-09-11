@@ -19,3 +19,5 @@ const adminTypeDefs = gql`
     removeUser(userId: ID): Boolean!
   }
 `;
+
+export default adminTypeDefs
