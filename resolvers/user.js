@@ -7,7 +7,7 @@ import resetPasswordEmailTemplate from '../htmlEmailTemplates/resetPasswordLink.
 import fileUpload from './../config/fileUpload.js';
 import authentication from '../middleware/authentication.js';
 import { getDatabase } from './../config/databaseConnection.js';
-import { decrypt, encrypt } from '../encryptionDecryption.js';
+import { decrypt, encrypt } from '../config/encryptionDecryption.js';
 
 const userResolvers = {
   Query: {
@@ -249,6 +249,38 @@ const userResolvers = {
         throw error;
       }
     },
+    userResetPassword: async (_, args, context, info) => {
+      try {
+        const { secretKey, token, password } = args;
+        if (secretKey && token && password) {
+
+          try {
+            const verifiedToken = Jwt.verify(token, process.env.JWT_SECRET_KEY);
+            const userId = decrypt(verifiedToken.userId, Buffer.from(secretKey, 'hex'));
+            
+            const bcryptSalt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_GEN_SALT_NUMBER));
+            const hashPassword = await bcrypt.hash(password, bcryptSalt);
+
+            const userCollection = (await getDatabase()).collection("users");
+            const updateStatus = await userCollection.updateOne({ _id: new ObjectId(userId) }, { $set: { password: hashPassword } });
+
+            return updateStatus.acknowledged;
+
+          } catch (error) {
+            if (error.name === 'JsonWebTokenError') {
+              throw new Error('Something Went Wrong');
+            } else {
+              throw error;
+            }
+          }
+
+        } else {
+          throw new Error("All Fields are Required");
+        }
+      } catch (error) {
+        throw error;
+      }
+    }
   }
 }
 
