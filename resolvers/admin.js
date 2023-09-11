@@ -2,7 +2,7 @@ import Jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { ObjectId } from 'mongodb';
 
-import { getDatabase } from './../config/databaseConnection.js'
+import { getDatabase } from './../config/databaseConnection.js';
 import authentication from '../middleware/authentication.js';
 
 const adminResolvers = {
