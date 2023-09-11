@@ -15,7 +15,6 @@ const adminTypeDefs = gql`
 
   type Mutation{
     adminLogin(email: String!, password: String!): String!
-    removeUser(userId: ID): Boolean!
   }
 `;
 
