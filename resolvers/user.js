@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { ObjectId } from 'mongodb';
 
 import sendEmail from '../config/emailSending.js';
+import fileUpload from './../config/fileUpload.js';
 import authentication from '../middleware/authentication.js';
 import { getDatabase } from './../config/databaseConnection.js';
 
@@ -172,6 +173,42 @@ const userResolvers = {
 
           } else {
             throw new Error("Invalid Request");
+          }
+
+        } else {
+          throw new Error("Authentication Failed");
+        }
+      } catch (error) {
+        throw error;
+      }
+    },
+    userUploadProfilePicture: async (_, args, context, info) => {
+      try {
+        const { userId } = await authentication(context);
+        if (userId == args.userId) {
+
+          if (ObjectId.isValid(args.userId)) {
+
+            const fileInfo = args.profilePicture;
+            const fileMaxSize = parseInt(process.env.PROFILE_PICTURE_MAX_SIZE);
+            const fileName = args.userId;
+            const filePath = process.env.PROFILE_PICTURE_PATH;
+            const supportedFormat = ['image/jpeg', 'image/png'];
+            const uploadStatus = await fileUpload(fileInfo, fileMaxSize, fileName, filePath, supportedFormat);
+
+            if(uploadStatus.status){
+
+              const userCollection = (await getDatabase()).collection("users");
+              const updateStatus = await userCollection.updateOne({ _id: new ObjectId(args.userId) }, { $set: { profilePicture:  uploadStatus.fileName} })
+             
+              return uploadStatus.status && updateStatus.acknowledged;
+
+            }else{
+              throw new Error("Failed to Upload Profile Picture");
+            }
+
+          } else {
+            throw new Error("Invalid Admin");
           }
 
         } else {
