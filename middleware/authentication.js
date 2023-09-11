@@ -7,7 +7,13 @@ const authentication = async (context) => {
 
       const authorizationToken = authorization.split(" ")[1];
       if (authorizationToken) {
-        return Jwt.verify(authorizationToken, process.env.JWT_SECRET_KEY);
+
+        try{
+          return Jwt.verify(authorizationToken, process.env.JWT_SECRET_KEY);
+        }catch(error){
+          throw new Error("Invalid Token");
+        }
+
       } else {
         throw new Error("Something Went Wrong");
       }
