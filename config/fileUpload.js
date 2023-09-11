@@ -3,7 +3,6 @@ import path from 'path';
 
 const fileUpload = async (fileInformation, maxFileSize, fileRename, savedFilePath, supportedFileFormat) => {
   try {
-
     const { filename, mimetype, encoding, createReadStream } = await fileInformation.file;
 
     // FILE VALIDATION
