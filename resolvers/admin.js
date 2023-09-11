@@ -8,7 +8,31 @@ import authentication from '../middleware/authentication.js';
 const adminResolvers = {
   Query: {
     admin: async (_, args, context, info) => {
+      try {
+        const { adminId } = await authentication(context);
+        if (adminId == args.adminId) {
 
+          if (ObjectId.isValid(args.adminId)) {
+
+            const adminCollection = (await getDatabase()).collection("admins");
+            const adminData = await adminCollection.findOne({ _id: new ObjectId(args.adminId) }, { projection: { password: 0 } });
+
+            if(adminData){
+              return adminData;
+            }else{
+              throw new Error("Nothing Found");
+            }
+
+          } else {
+            throw new Error("Invalid Admin");
+          }
+
+        } else {
+          throw new Error("Authentication Failed");
+        }
+      } catch (error) {
+        throw error;
+      }
     }
   },
   Mutation: {
