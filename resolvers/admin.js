@@ -17,9 +17,9 @@ const adminResolvers = {
             const adminCollection = (await getDatabase()).collection("admins");
             const adminData = await adminCollection.findOne({ _id: new ObjectId(args.adminId) }, { projection: { password: 0 } });
 
-            if(adminData){
+            if (adminData) {
               return adminData;
-            }else{
+            } else {
               throw new Error("Nothing Found");
             }
 
