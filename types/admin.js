@@ -4,13 +4,13 @@ const adminTypeDefs = gql`
   scalar ID
 
   type Admin{
-    _id: ID
+    _id: ID!
     fullName: String!
     email: String!
   }
 
   type Query{
-    admin(adminId: ID!): Admin
+    admin(adminId: ID!): Admin!
   }
 
   type Mutation{
