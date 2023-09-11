@@ -1,9 +1,11 @@
 import { mergeResolvers } from "@graphql-tools/merge";
 
 import userResolvers from './user.js';
+import adminResolvers from "./admin.js";
 
 const resolvers = mergeResolvers([
-  userResolvers
+  userResolvers,
+  adminResolvers
 ]);
 
 export default resolvers;
