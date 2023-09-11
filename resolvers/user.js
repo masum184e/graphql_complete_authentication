@@ -7,6 +7,7 @@ import resetPasswordEmailTemplate from '../htmlEmailTemplates/resetPasswordLink.
 import fileUpload from './../config/fileUpload.js';
 import authentication from '../middleware/authentication.js';
 import { getDatabase } from './../config/databaseConnection.js';
+import { decrypt, encrypt } from '../encryptionDecryption.js';
 
 const userResolvers = {
   Query: {
@@ -226,12 +227,13 @@ const userResolvers = {
 
           const userCollection = (await getDatabase()).collection("users");
 
-          const registerUser = await userCollection.findOne({ email }, { projection: { _id: 1, password: 1 } });
+          const registerUser = await userCollection.findOne({ email }, { projection: { _id: 1 } });
           if (registerUser) {
 
-            const jwt_secret_key = registerUser._id + process.env.JWT_SECRET_KEY;
-            const resetPasswordToken = Jwt.sign({ userId: registerUser._id }, jwt_secret_key, { expiresIn: process.env.TOKEN_EXPIRES });
-            const resetPasswordLink = `http://localhost:${process.env.PORT}/new-password/${registerUser._id}/${resetPasswordToken}`;
+
+            const { secretKey, encryptedUserId } = encrypt(registerUser._id.toString());
+            const resetPasswordToken = Jwt.sign({ userId: encryptedUserId }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.TOKEN_EXPIRES });
+            const resetPasswordLink = `http://localhost:${process.env.PORT}/new-password/${secretKey.toString('hex')}/${resetPasswordToken}`;
             const emailTitle = "Reset Password";
             const emailTemplate = resetPasswordEmailTemplate(emailTitle, resetPasswordLink);
 
@@ -246,7 +248,7 @@ const userResolvers = {
       } catch (error) {
         throw error;
       }
-    }
+    },
   }
 }
 
