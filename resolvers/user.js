@@ -9,7 +9,49 @@ import { getDatabase } from './../config/databaseConnection.js';
 const userResolvers = {
   Query: {
     user: async (_, args, context, info) => {
+      try {
+        const { adminId, userId } = await authentication(context);
+        const targetCollectioinName = adminId ? "admins" : "users";
+        const targetId = adminId ? adminId : userId;
 
+        if (targetId) {
+          if (ObjectId.isValid(targetId)) {
+
+            // CHECKING AUTHORIZED PERSON(ADMIN||USER) IS VALID OR NOT
+            const targetCollection = (await getDatabase()).collection(targetCollectioinName);
+            const targetCount = await targetCollection.countDocuments({ _id: new ObjectId(targetId) });
+            if (targetCount === 1) {
+
+              if (args.userId) {
+                if (ObjectId.isValid(args.userId)) {
+
+                  const userCollection = (await getDatabase()).collection("users");
+                  const userData = await userCollection.findOne({ _id: new ObjectId(args.userId) }, { projection: { password: 0 } });
+                  if (userData) {
+                    return userData;
+                  } else {
+                    throw new Error("Nothing Found");
+                  }
+
+                } else {
+                  throw new Error("Invalid User");
+                }
+              } else {
+                throw new Error("User Id Required");
+              }
+
+            } else {
+              throw new Error("Invalid Request");
+            }
+          } else {
+            throw new Error("Invalid Request");
+          }
+        } else {
+          throw new Error("Authentication Failed");
+        }
+      } catch (error) {
+        throw error;
+      }
     },
     users: async (_, args, context, info) => {
       try {
