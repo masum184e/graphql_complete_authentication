@@ -43,6 +43,6 @@ const startServer = async() => {
     console.log(`Server is running at http://localhost:${PORT}`);
     console.log(`GraphQL endpoint: http://localhost:${PORT}${server.graphqlPath}`);
   })
-}
+};
 
 startServer();
