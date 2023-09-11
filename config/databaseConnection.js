@@ -16,7 +16,7 @@ const databaseConnection = async (DATABASE_URL, DATABASE_NAME) => {
 const getDatabase = async () => {
   if(!database){
     throw new Error('Database not connected');
-  };
+  }
   return database;
 };
 
