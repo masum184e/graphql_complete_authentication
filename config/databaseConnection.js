@@ -11,13 +11,13 @@ const databaseConnection = async (DATABASE_URL, DATABASE_NAME) => {
   } catch (err) {
     console.error('Error connecting to MongoDB: ', err);
   }
-}
+};
 
 const getDatabase = async () => {
   if(!database){
     throw new Error('Database not connected');
   }
   return database;
-}
+};
 
-export { databaseConnection, getDatabase }
+export { databaseConnection, getDatabase };
