@@ -26,7 +26,7 @@ const userTypeDefs = gql`
     removeUser(userId: ID!): Boolean!
     userUploadProfilePicture(userId: ID!, profilePicture: Upload!): Boolean!
     userResetPasswordSendEmail(email: String!): Boolean!
-    userResetPassword(userId: ID, token: String!, password: String!): Boolean!
+    userResetPassword(userId: ID!, token: String!, password: String!): Boolean!
   }
 `;
 
