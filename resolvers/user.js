@@ -145,6 +145,41 @@ const userResolvers = {
       } catch (error) {
         throw error;
       }
+    },
+    removeUser: async (_, args, context, info) => {
+      try {
+        const { adminId } = await authentication(context);
+        if (adminId) {
+
+          // CHECKING AUTHORIZED PERSON(ADMIN) IS VALID OR NOT
+          const adminCollection = (await getDatabase()).collection("admins");
+          const adminCount = await adminCollection.countDocuments({ _id: new ObjectId(adminId) });
+          if (adminCount === 1) {
+
+            if (args.userId) {
+              if (ObjectId.isValid(args.userId)) {
+
+                const userCollection = (await getDatabase()).collection("users");
+                const removedUser = await userCollection.deleteOne({ _id: new ObjectId(args.userId) });
+                return removedUser.acknowledged;
+
+              } else {
+                throw new Error("Invalid User");
+              }
+            } else {
+              throw new Error("User Id Required");
+            }
+
+          } else {
+            throw new Error("Invalid Request");
+          }
+
+        } else {
+          throw new Error("Authentication Failed");
+        }
+      } catch (error) {
+        throw error;
+      }
     }
   }
 }
