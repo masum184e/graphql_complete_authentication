@@ -20,4 +20,4 @@ const adminTypeDefs = gql`
   }
 `;
 
-export default adminTypeDefs
+export default adminTypeDefs;
