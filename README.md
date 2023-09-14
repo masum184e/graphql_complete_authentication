@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This GraphQL API is designed to manage user and admin data within an application. It offers a set of queries and mutations to interact with the data related to users and administrators. The API is responsible for user registration, authentication, profile management, and password reset functionalities, as well as admin authentication and profile retrieval. CRUD operations are employed for user and admin management. Additionally, the API includes features for email sending, facilitating essential communication with users, such as password reset emails, and file uploading, allowing users to personalize their profiles by uploading images.
+<p align="justify">This GraphQL API is designed to manage user and admin data within an application. It offers a set of queries and mutations to interact with the data related to users and administrators. The API is responsible for user registration, authentication, profile management, and password reset functionalities, as well as admin authentication and profile retrieval. CRUD operations are employed for user and admin management. Additionally, the API includes features for email sending, facilitating essential communication with users, such as password reset emails, and file uploading, allowing users to personalize their profiles by uploading images.</p>
 
 ## Requirements
 
@@ -29,4 +29,22 @@ node index.js
 | All User Data                  | Authorized Admin     |
 | Remove User                    | Authorized Admin     |
 
+## CRUD Operations
+
+**Create (C):**
+
+- **User Registration:** The API allows users to create an account by providing their first name, last name, email, phone number, and password. When users register, a new user document is created in the database.
+
+**Read (R):**
+
+- **Query Resolvers:** The API provides query resolvers (user and users for users, and admin for admins) to retrieve user and admin data from the database. These resolvers enable reading user and admin profiles based on their IDs.
+
+**Update (U):**
+
+- **User Profile Management:** Users can update their profile profile picture. When users update their profiles, the API modifies their existing user records in the database to reflect the changes.
+- **User Reset Password:** When user forgot his password, a reset password link is sent to his provided email, here user have to update his password.
+
+**Delete (D):**
+
+- **Remove User:** Admins have the capability to delete user accounts using the removeUser mutation. This operation deletes the user's document from the database.
 
