@@ -48,3 +48,20 @@ node index.js
 
 - **Remove User:** Admins have the capability to delete user accounts using the removeUser mutation. This operation deletes the user's document from the database.
 
+## Environment Variables
+
+| Configuration Key         | Value                |
+| ------------------------- |----------------------|
+| PORT                      |                      |
+| DATABASE_NAME             |                      |
+| DATABASE_URL              |                      |
+| SMTP_HOST                 |                      |
+| SMTP_PORT                 |                      |
+| SMTP_USER                 |                      |
+| SMTP_PASSWORD             |                      |
+| BCRYPT_GEN_SALT_NUMBER    |                      |
+| JWT_SECRET_KEY            |                      |
+| TOKEN_EXPIRES             |                      |
+| PROFILE_PICTURE_PATH      |                      |
+| PROFILE_PICTURE_MAX_SIZE  |                      |
+
