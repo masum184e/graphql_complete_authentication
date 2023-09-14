@@ -1,4 +1,8 @@
-## GraphQL Complete Authentication
+# GraphQL Complete Authentication
+
+## Introduction
+
+This GraphQL API is designed to manage user and admin data within an application. It offers a set of queries and mutations to interact with the data related to users and administrators. The API is responsible for user registration, authentication, profile management, and password reset functionalities, as well as admin authentication and profile retrieval. CRUD operations are employed for user and admin management. Additionally, the API includes features for email sending, facilitating essential communication with users, such as password reset emails, and file uploading, allowing users to personalize their profiles by uploading images.
 
 ## Requirements
 
@@ -11,7 +15,7 @@ npm install
 node index.js
 ```
 
-# Features
+## Features
 
 | Feature Name                   | Accessibility        |
 | ------------------------------ | -------------------- |
