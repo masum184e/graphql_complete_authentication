@@ -37,7 +37,7 @@ node index.js
 
 **Read (R):**
 
-- **Query Resolvers:** The API provides query resolvers (user and users for users, and admin for admins) to retrieve user and admin data from the database. These resolvers enable reading user and admin profiles based on their IDs.
+- **Query Resolvers:** The API provides query resolvers (user for users, and admin and users for admins) to retrieve user and admin data from the database. These resolvers enable reading user and admin profiles based on their IDs.
 
 **Update (U):**
 
