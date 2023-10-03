@@ -1,20 +1,15 @@
 {
-  "name": "tripper",
-  "version": 2,
+  "name": "graphql_complete_authentication",
   "builds": [
     {
-      "src": "index.js",
+      "src": "/**/*.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "serviceAccountKey.json",
-      "use": "@now/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "api/index.js"
     }
   ]
 }
