@@ -124,16 +124,16 @@ node index.js
 
 ## Dependencies
 
-| Package Name          |  Description         |
-| ----------------------|----------------------|
-| apollo-server-express |
-| graphql-upload        |
-| nodemailer            |
-| zxcvbn                |
-| mongodb               |
-| bcrypt                |
-| jsonwebtoken          |
-| crypto                |
-| cors                  |
-| dotenv                |
-| express               |
+| Package Name          |  Description                                                                 |
+| ----------------------|------------------------------------------------------------------------------|
+| apollo-server-express | build GraphQL server                                                         |
+| graphql-upload        | handle file upload in graphql                                                |
+| nodemailer            | send email                                                                   |
+| zxcvbn                | check the strength of password                                               |
+| mongodb               | NoSQL database                                                               |
+| bcrypt                | hash and manage password                                                     |
+| jsonwebtoken          | securely authenticate users and share information                            |
+| crypto                | perform cryptographic  task                                                  |
+| cors                  | secure cross-origin requests and data transfers between browsers and servers |
+| dotenv                | load environment variables                                                   |
+| express               | provides a robust set of features for web and mobile applications            |
