@@ -15,6 +15,42 @@ npm install
 node index.js
 ```
 
+## API Structure
+
+```bash
+├─ config
+│  ├─ databaseConnection.js
+│  ├─ emailSending.js
+│  ├─ enryptionDecryption.js
+│  ├─ fileUpload.js
+│  └─ validation.js
+│
+├─ htmlEmailTemplates
+│  └─resetPasswordLink.js
+│
+├─ middleware
+│  └─authentication.js
+│
+├─ profilePicture
+│
+├─ reslovers
+│  ├─ admin.js
+│  ├─ index.js
+│  └─ user.js
+│
+├─ types
+│  ├─ admin.js
+│  ├─ index.js
+│  └─ user.js
+│
+├─ .env
+├─ .gitignore
+├─ index.js
+├─ package-lock.json
+├─ package.json
+└─ README.md
+```
+
 ## Features
 
 | Feature Name                   | Accessibility        |
