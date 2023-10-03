@@ -122,3 +122,18 @@ node index.js
 | PROFILE_PICTURE_PATH      |                      |
 | PROFILE_PICTURE_MAX_SIZE  |                      |
 
+## Dependencies
+
+| Package Name          |  Description         |
+| ----------------------|----------------------|
+| apollo-server-express |
+| graphql-upload        |
+| nodemailer            |
+| zxcvbn                |
+| mongodb               |
+| bcrypt                |
+| jsonwebtoken          |
+| crypto                |
+| cors                  |
+| dotenv                |
+| express               |
