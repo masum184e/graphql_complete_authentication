@@ -48,7 +48,8 @@ node index.js
 ├─ index.js
 ├─ package-lock.json
 ├─ package.json
-└─ README.md
+├─ README.md
+└─ vercel.json
 ```
 
 ## Features
