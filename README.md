@@ -107,20 +107,20 @@ node index.js
 
 ## Environment Variables
 
-| Configuration Key         | Value                |
-| ------------------------- |----------------------|
-| PORT                      |                      |
-| DATABASE_NAME             |                      |
-| DATABASE_URL              |                      |
-| SMTP_HOST                 |                      |
-| SMTP_PORT                 |                      |
-| SMTP_USER                 |                      |
-| SMTP_PASSWORD             |                      |
-| BCRYPT_GEN_SALT_NUMBER    |                      |
-| JWT_SECRET_KEY            |                      |
-| TOKEN_EXPIRES             |                      |
-| PROFILE_PICTURE_PATH      |                      |
-| PROFILE_PICTURE_MAX_SIZE  |                      |
+| Configuration Key         | Value                                                                                      |
+| ------------------------- |--------------------------------------------------------------------------------------------|
+| PORT                      | specifies the port on which the server will listen for incoming connections                |
+| DATABASE_NAME             | specifies the name of the database                                                         |
+| DATABASE_URL              | specifies the URL or connection string for the MongoDB database                            |
+| SMTP_HOST                 | specifies the SMTP server host for sending email                                           |
+| SMTP_PORT                 | specifies the SMTP server port                                                             |
+| SMTP_USER                 | specifies the email address from which email will sent                                     |
+| SMTP_PASSWORD             | specifies the  app password associated with the SMTP_USER email address for authentication |
+| BCRYPT_GEN_SALT_NUMBER    | specifies the number of rounds to use for generating a BCrypt salt                         |
+| JWT_SECRET_KEY            | specifies the secret key used for signing and verifying JWTs                               |
+| TOKEN_EXPIRES             | specifies the expiration time for JWT tokens                                               |
+| PROFILE_PICTURE_PATH      | specifies the file path where profile pictures are saved                                   |
+| PROFILE_PICTURE_MAX_SIZE  | specifies the maximum allowed size for profile pictures                                    |
 
 ## Dependencies
 
