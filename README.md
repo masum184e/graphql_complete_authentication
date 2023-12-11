@@ -108,9 +108,11 @@ node index.js
 | PROFILE_PICTURE_MAX_SIZE  | specifies the maximum allowed size for profile pictures                                    |
 
 ## Email Sending
-<p>When a user forgets his password, he can reset it by providing his email address. An email will be sent to his email address containing a reset password link. The API uses the nodemailer package to send an HTML template as an email.</p>
+<p>When a user forgets his password, he can reset it by providing his email address. An email will be sent to his email address containing a reset password link. The API uses the <code>nodemailer</code> package to send an HTML template as an email.</p>
 
 ## Security
+- **bcrypt:** password is hashed using <code>bcrypt</code>
+- **crypto & AES:** <code>crypto</code>, as well as the AES algorithm, are used to secure the password reset link.
 
 ## GraphQL
 
