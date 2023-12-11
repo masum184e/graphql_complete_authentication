@@ -11,6 +11,8 @@
 ## How to Run
 
 ```
+git clone https://github.com/masum184e/graphql_complete_authentication.git
+cd graphql_complete_authentication
 npm install
 node index.js
 ```
