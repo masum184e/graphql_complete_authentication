@@ -143,3 +143,19 @@ node index.js
 | cors                  | secure cross-origin requests and data transfers between browsers and servers |
 | dotenv                | load environment variables                                                   |
 | express               | provides a robust set of features for web and mobile applications            |
+
+## GraphQL
+
+**Query:**
+- users
+- user
+- admin
+
+**Mutation:**
+- userLogin
+- userRegistration
+- userUploadProfilePicture
+- userResetPasswordSendEmail
+- userResetPassword
+- adminLogin
+- removeUser
