@@ -198,22 +198,27 @@ const userResolvers = {
 
           if (ObjectId.isValid(args.userId)) {
 
-            const fileInfo = args.profilePicture;
-            const fileMaxSize = parseInt(process.env.PROFILE_PICTURE_MAX_SIZE);
-            const fileName = args.userId;
-            const filePath = process.env.PROFILE_PICTURE_PATH;
-            const supportedFormat = ['image/jpeg', 'image/png'];
-            const uploadStatus = await fileUpload(fileInfo, fileMaxSize, fileName, filePath, supportedFormat);
+            if (args.profilePicture) {
+              const fileInfo = args.profilePicture;
+              const fileMaxSize = parseInt(process.env.PROFILE_PICTURE_MAX_SIZE);
+              const fileName = args.userId;
+              const filePath = process.env.PROFILE_PICTURE_PATH;
+              const supportedFormat = ['image/jpeg', 'image/png'];
+              const uploadStatus = await fileUpload(fileInfo, fileMaxSize, fileName, filePath, supportedFormat);
 
-            if (uploadStatus.status) {
+              if (uploadStatus.status) {
 
-              const userCollection = (await getDatabase()).collection("users");
-              const updateStatus = await userCollection.updateOne({ _id: new ObjectId(args.userId) }, { $set: { profilePicture: uploadStatus.fileName } })
+                const userCollection = (await getDatabase()).collection("users");
+                const updateStatus = await userCollection.updateOne({ _id: new ObjectId(args.userId) }, { $set: { profilePicture: uploadStatus.fileName } })
 
-              return uploadStatus.status && updateStatus.acknowledged;
+                return uploadStatus.status && updateStatus.acknowledged;
+
+              } else {
+                throw new Error("Failed to Upload Profile Picture");
+              }
 
             } else {
-              throw new Error("Failed to Upload Profile Picture");
+              throw new Error("All Fields Are Required");
             }
 
           } else {
@@ -237,8 +242,8 @@ const userResolvers = {
           const registerUser = await userCollection.findOne({ email }, { projection: { _id: 1 } });
           if (registerUser) {
 
-
             const { secretKey, encryptedUserId } = encrypt(registerUser._id.toString());
+            console.log(secretKey, encryptedUserId)
             const resetPasswordToken = Jwt.sign({ userId: encryptedUserId }, process.env.JWT_SECRET_KEY, { expiresIn: process.env.TOKEN_EXPIRES });
             const resetPasswordLink = `http://localhost:${process.env.PORT}/new-password/${secretKey.toString('hex')}/${resetPasswordToken}`;
             const emailTitle = "Reset Password";
