@@ -7,7 +7,7 @@ const encrypt = (text) => {
     const cipher = crypto.createCipheriv('aes-256-cbc', bufferSecretKey, iv);
     let encrypted = cipher.update(text, 'utf-8', 'hex');
     encrypted += cipher.final('hex');
-    return { bufferSecretKey, encryptedText: iv.toString('hex') + encrypted };
+    return { secretKey: bufferSecretKey, encryptedUserId: iv.toString('hex') + encrypted };
   } catch (error) {
     throw new Error("Something Went Wrong");
   }
