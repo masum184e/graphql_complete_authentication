@@ -86,6 +86,27 @@ node index.js
 
 **Remove User:** Authorized amdin can remove a user by his userId
 
+## Environment Variables
+
+| Configuration Key         | Value                                                                                      |
+| ------------------------- |--------------------------------------------------------------------------------------------|
+| PORT                      | specifies the port on which the server will listen for incoming connections                |
+| DATABASE_NAME             | specifies the name of the database                                                         |
+| DATABASE_URL              | specifies the URL or connection string for the MongoDB database                            |
+| SMTP_HOST                 | specifies the SMTP server host for sending email                                           |
+| SMTP_PORT                 | specifies the SMTP server port                                                             |
+| SMTP_USER                 | specifies the email address from which email will sent                                     |
+| SMTP_PASSWORD             | specifies the  app password associated with the SMTP_USER email address for authentication |
+| BCRYPT_GEN_SALT_NUMBER    | specifies the number of rounds to use for generating a BCrypt salt                         |
+| JWT_SECRET_KEY            | specifies the secret key used for signing and verifying JWTs                               |
+| TOKEN_EXPIRES             | specifies the expiration time for JWT tokens                                               |
+| PROFILE_PICTURE_PATH      | specifies the file path where profile pictures are saved                                   |
+| PROFILE_PICTURE_MAX_SIZE  | specifies the maximum allowed size for profile pictures                                    |
+
+## Email Sending
+
+## Security
+
 ## CRUD Operations
 
 **Create (C):**
@@ -104,23 +125,6 @@ node index.js
 **Delete (D):**
 
 - **Remove User:** Admins have the capability to delete user accounts using the removeUser mutation. This operation deletes the user's document from the database.
-
-## Environment Variables
-
-| Configuration Key         | Value                                                                                      |
-| ------------------------- |--------------------------------------------------------------------------------------------|
-| PORT                      | specifies the port on which the server will listen for incoming connections                |
-| DATABASE_NAME             | specifies the name of the database                                                         |
-| DATABASE_URL              | specifies the URL or connection string for the MongoDB database                            |
-| SMTP_HOST                 | specifies the SMTP server host for sending email                                           |
-| SMTP_PORT                 | specifies the SMTP server port                                                             |
-| SMTP_USER                 | specifies the email address from which email will sent                                     |
-| SMTP_PASSWORD             | specifies the  app password associated with the SMTP_USER email address for authentication |
-| BCRYPT_GEN_SALT_NUMBER    | specifies the number of rounds to use for generating a BCrypt salt                         |
-| JWT_SECRET_KEY            | specifies the secret key used for signing and verifying JWTs                               |
-| TOKEN_EXPIRES             | specifies the expiration time for JWT tokens                                               |
-| PROFILE_PICTURE_PATH      | specifies the file path where profile pictures are saved                                   |
-| PROFILE_PICTURE_MAX_SIZE  | specifies the maximum allowed size for profile pictures                                    |
 
 ## Dependencies
 
