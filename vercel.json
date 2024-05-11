@@ -1,5 +1,4 @@
 {
-  "name": "graphql_complete_authentication",
   "builds": [
     {
       "src": "/**/*.js",
