@@ -23,37 +23,37 @@ npx nodemon index.js
 
 ```bash
 ├─ config
-│  ├─ databaseConnection.js
-│  ├─ emailSending.js
-│  ├─ enryptionDecryption.js
-│  ├─ fileUpload.js
-│  └─ validation.js
+│  ├─ databaseConnection.js   - handle MongoClient
+│  ├─ emailSending.js         - configure nodemailer
+│  ├─ enryptionDecryption.js  - handle AES encryption decryption
+│  ├─ fileUpload.js           - handle stream for uploading 
+│  └─ validation.js           - handle regular expression
 │
 ├─ htmlEmailTemplates
-│  └─resetPasswordLink.js
+│  └─resetPasswordLink.js     - html template sent for reset password link
 │
 ├─ middleware
-│  └─authentication.js
+│  └─authentication.js        - handle header bearer token cookie authentication
 │
-├─ profilePicture
+├─ profilePicture             - store uploaded profile picture
 │
 ├─ reslovers
-│  ├─ admin.js
-│  ├─ index.js
-│  └─ user.js
+│  ├─ admin.js                - handle admin abilities
+│  ├─ index.js                - merge all resolver
+│  └─ user.js                 - handle user abilities
 │
 ├─ types
-│  ├─ admin.js
-│  ├─ index.js
-│  └─ user.js
+│  ├─ admin.js                - define admin abilities
+│  ├─ index.js                - merge all types
+│  └─ user.js                 - define admin abilities
 │
-├─ .env
-├─ .gitignore
-├─ index.js
-├─ package-lock.json
-├─ package.json
-├─ README.md
-└─ vercel.json
+├─ .env                       - store all environment variable
+├─ .gitignore                 - store details about ingnored file
+├─ index.js                   - server the server
+├─ package-lock.json          - configuration for server
+├─ package.json               - configuration for server
+├─ README.md                  - server a details documentation
+└─ vercel.json                - configuration for vercel
 ```
 
 ## Features
@@ -156,7 +156,7 @@ npx nodemon index.js
 | mongodb               | NoSQL database                                                               |
 | bcrypt                | hash and manage password                                                     |
 | jsonwebtoken          | securely authenticate users and share information                            |
-| crypto                | perform cryptographic  task                                                  |
+| crypto                | perform cryptographic  task while sending reset password link                |
 | cors                  | secure cross-origin requests and data transfers between browsers and servers |
 | dotenv                | load environment variables                                                   |
 | express               | provides a robust set of features for web and mobile applications            |
