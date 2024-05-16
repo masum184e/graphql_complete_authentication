@@ -134,16 +134,16 @@ npx nodemon index.js
 
 **Read (R):**
 
-- **Query Resolvers:** The API provides query resolvers (user for users, and admin and users for admins) to retrieve user and admin data from the database. These resolvers enable reading user and admin profiles based on their IDs.
+- **Query Resolvers:** The API provides query resolvers (*user* for user and admin, also *admin* and *users* for admins) to retrieve user and admin data from the database. These resolvers enable reading user and admin profiles based on their IDs.
 
 **Update (U):**
 
-- **User Profile Management:** Users can update their profile profile picture. When users update their profiles, the API modifies their existing user records in the database to reflect the changes.
-- **User Reset Password:** When user forgot his password, a reset password link is sent to his provided email, here user have to update his password.
+- **User Profile Management:** Authrorized user can update their profile profile picture. When authorized users update their profiles, the API modifies their existing user records in the database to reflect the changes.
+- **User Reset Password:** When user forgot his password, a reset password link is sent to his provided email. By clicking on that link he will be capable to update his password.
 
 **Delete (D):**
 
-- **Remove User:** Admins have the capability to delete user accounts using the removeUser mutation. This operation deletes the user's document from the database.
+- **Remove User:** Admins have the capability to delete user accounts using the *removeUser* mutation. This operation deletes the user's document from the database.
 
 ## Dependencies
 
