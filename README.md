@@ -48,11 +48,11 @@ npx nodemon index.js
 │  └─ user.js                 - define admin abilities
 │
 ├─ .env                       - store all environment variable
-├─ .gitignore                 - store details about ingnored file
-├─ index.js                   - server the server
+├─ .gitignore                 - store details about ingnored file by git
+├─ index.js                   - serve the server
 ├─ package-lock.json          - configuration for server
 ├─ package.json               - configuration for server
-├─ README.md                  - server a details documentation
+├─ README.md                  - serve a details documentation
 └─ vercel.json                - configuration for vercel
 ```
 
